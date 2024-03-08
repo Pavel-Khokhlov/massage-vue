@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <my-header />
+  <!-- <h2>App</h2> -->
+  <main-carousel :slides="slides" />
+  <my-about />
+  <my-massage />
+  <my-pravilo />
+  <my-kinezio />
+  <my-sadhu />
+  <my-feedbacks />
+  <my-contacts />
+  <my-footer />
+  <my-menu-modal :isOpen="$store.state.isMenuOpen" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import slides from "./data/mainCarousel.js";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      slides: slides,
+    };
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+.section
+  margin-bottom: min(50px, 10vw)
+  &__title
+    margin: 0 auto
+    padding-left: 15px
+  &__text
+    padding: 15px
 </style>
