@@ -16,4 +16,4 @@ npm run build
 echo Deploying.. 
 git add -A 
 git commit -m 'deploy' 
-git push -f https://github.com/Pavel-Khokhlov/massage-vue.git main
+git push -f https://github.com/Pavel-Khokhlov/massage-vue.git master
