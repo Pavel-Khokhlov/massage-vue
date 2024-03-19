@@ -9,6 +9,7 @@
   <my-sadhu />
   <my-feedbacks />
   <my-contacts />
+  <my-faq />
   <my-footer />
   <my-menu-modal :isOpen="$store.state.isMenuOpen" />
 </template>

@@ -10,8 +10,15 @@
       :pauseAutoplayOnHover="true"
       :currentSlide="currentSlide"
     >
-      <slide v-for="slide in slides" :key="slide.id"
-        ><img :src="getImage(slide.path)" class="carousel__image" />
+      <slide
+        v-for="slide in slides"
+        :key="slide.id"
+        class="carousel__slide"
+        :style="{
+          backgroundImage: `url(${require('../assets/images/mainCarousel/' +
+            `${slide.path}.webp`)})`,
+        }"
+      >
         <div class="carousel__info">
           <h1 class="carousel__title">{{ slide.title }}</h1>
           <p class="carousel__text">{{ slide.text }}</p>
@@ -20,7 +27,12 @@
       </slide>
 
       <template #addons>
-        <navigation />
+        <button @click="prevSlide" class="carousel__nav prev">
+          <img :src="arrowPrev" alt="my-logo" class="carousel__nav-icon" />
+        </button>
+        <button @click="nextSlide" class="carousel__nav next">
+          <img :src="arrowNext" alt="my-logo" class="carousel__nav-icon" />
+        </button>
         <div class="carousel__pagination">
           <button
             v-for="(slide, index) in slides"
@@ -37,13 +49,20 @@
 </template>
 
 <script>
-import { Carousel, Slide, Navigation } from "vue3-carousel";
+import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import arrowPrev from "../assets/images/icons/arrowPrev.svg";
+import arrowNext from "../assets/images/icons/arrowNext.svg";
 export default {
   components: {
     Carousel,
     Slide,
-    Navigation,
+  },
+  setup() {
+    return {
+      arrowPrev,
+      arrowNext,
+    };
   },
   data() {
     return {
@@ -57,11 +76,16 @@ export default {
   },
   methods: {
     handleClickPage(value) {
-      console.log(value);
       this.currentSlide = value;
     },
     getImage(path) {
-      return require(`../assets/images/mainCarousel/${path}.jpg`);
+      return require(`../assets/images/mainCarousel/${path}.webp`);
+    },
+    nextSlide() {
+      this.currentSlide += 1;
+    },
+    prevSlide() {
+      this.currentSlide -= 1;
     },
   },
 };
@@ -77,6 +101,8 @@ export default {
         position: relative
         height: calc(100vh - $header-height)
         width: 100%
+        background-position: center
+        background-size: cover
     &__image
         width: 100%
         height: 100%
@@ -96,7 +122,7 @@ export default {
         border: 1px solid rgba($base-white-color, 0.5)
     &__title
         text-align: start
-        font-size: min(34px, 8vw)
+        font-size: min(34px, 6vw)
         color: $base-black-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
         margin: 0
@@ -119,6 +145,20 @@ export default {
         color: $base-white-color
         box-shadow: 2px 2px 4px rgba($base-black-color, 0.3)
         margin-top: min(100px, 3vw)
+    &__nav
+        position: absolute
+        top: 0
+        width: 10%
+        height: 100%
+        background: transparent
+        border: none
+        &.next
+            right: 0
+        &.prev
+            left: 0
+        &-icon
+            width: 20px
+            height: 20px
     &__pagination
         position: absolute
         display: flex

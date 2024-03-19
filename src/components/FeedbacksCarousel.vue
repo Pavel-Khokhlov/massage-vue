@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="carousel">
     <carousel
       ref="carousel"
       v-model="currentSlide"
@@ -16,7 +16,7 @@
             <div class="carousel__avatar"></div>
             <h3 class="carousel__title">{{ slide.name }}</h3>
           </div>
-          <p class="carousel__text">{{ slide.feedback }}</p>
+          <q class="carousel__text">{{ slide.feedback }}</q>
           <p class="carousel__contact">{{ slide.contact }}</p>
         </div>
       </slide>
@@ -61,9 +61,6 @@ export default {
     handleClickPage(value) {
       this.currentSlide = value;
     },
-    getImage(path) {
-      return require(`../assets/images/mainCarousel/${path}.jpg`);
-    },
     nextSlide() {
       this.currentSlide += 1;
     },
@@ -76,13 +73,12 @@ export default {
 
 <style lang="sass" scoped>
 @import ../sass/index
-.section
+.carousel
     position: relative
     margin: 0 -min(50px, 3vw)
-.carousel
     &__slide
         position: relative
-        height: 70vh
+        height: 60vh
         width: 100%
     &__stack
         height: 95%
@@ -138,11 +134,10 @@ export default {
     &__pagination
         display: flex
         gap: 10px
-        margin: min(20px, 3vw)
         padding: 0
     &__dot
         border: none
-        background: rgba($base-black-color, 0.3)
+        background: rgba($base-white-color, 0.3)
         width: 8px
         height: 8px
         border-radius: 4px
@@ -150,5 +145,5 @@ export default {
         transition: $app-transition03
         &._active
             transition: $app-transition03
-            background: rgba($base-black-color, 1)
+            background: rgba($base-white-color, 1)
 </style>

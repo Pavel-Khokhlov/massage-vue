@@ -2,18 +2,16 @@
   <section class="section">
     <h2 class="section__title">Отзывы</h2>
     <p class="section__text">
-      Благодарю всех вас за оказанное мне доверие, за то, что не сомневаетесь во
-      мне. Мне безумно приятно получать от вас слова благодарности. От всей души
-      спасибо вам!<br><br>С&nbsp;уважением&nbsp;Павел.
+      Благодарю вас за оказанное мне доверие. Мне очень приятно получать от вас
+      обратную связь. Благодарю от всей души!<br /><br />С&nbsp;уважением&nbsp;Павел.
     </p>
     <feedbacks-carousel :slides="feedbacks" />
   </section>
 </template>
 
 <script>
-import feedbacks from "../data/feedbacksCarousel.js";
+import feedbacks from "../data/dataFeedbacks.js";
 export default {
-  name: "App",
   data() {
     return {
       feedbacks: feedbacks,
@@ -21,3 +19,15 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.section
+  background: url('../assets/images/backgrounds/feedbacks.webp')
+  background-position: center
+  background-size: cover
+  padding: min(50px, 5vw) 0
+  &__title
+    color: white
+  &__text
+    color: white
+</style>

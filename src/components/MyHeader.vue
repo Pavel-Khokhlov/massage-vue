@@ -1,5 +1,6 @@
 <template>
   <header class="header">
+    <scroll-indicator />
     <h2 class="header__logo">П</h2>
     <my-burger />
   </header>
