@@ -96,6 +96,7 @@ export default {
 .section
     position: relative
     margin: 0 -min(50px, 3vw)
+    padding: 0
 .carousel
     &__slide
         position: relative

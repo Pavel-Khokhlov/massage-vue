@@ -41,7 +41,5 @@ export default {
     top: 0
     left: 0
     height: 2px
-    background: #e96443
-    background: -webkit-linear-gradient(to right, #904e95, #e96443)
-    background: linear-gradient(to right, #904e95, #e96443)
+    background: rgba(0,0,255,0.5)
 </style>

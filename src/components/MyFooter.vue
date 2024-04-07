@@ -29,7 +29,7 @@ export default {
 .footer
   display: flex
   justify-content: space-between
-  margin: 0 min(50px, 3vw) min(50px, 5vw)
+  margin: min(50px, 5vw) min(50px, 3vw)
   &__copyright
     font-family: 'Jura'
     font-size: min(16px, 3vw)

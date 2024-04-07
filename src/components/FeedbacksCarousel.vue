@@ -3,7 +3,7 @@
     <carousel
       ref="carousel"
       v-model="currentSlide"
-      :items-to-show="1.2"
+      :items-to-show="itemsToShow"
       :autoplay="5000"
       :wrap-around="true"
       :transition="500"
@@ -12,10 +12,8 @@
     >
       <slide v-for="slide in slides" :key="slide.id + 20">
         <div class="carousel__stack">
-          <div class="carousel__top">
-            <div class="carousel__avatar"></div>
-            <h3 class="carousel__title">{{ slide.name }}</h3>
-          </div>
+          <img alt="avatar" class="carousel__avatar" :src="require(`../assets/images/feedbackCarousel/${slide.avatar}.webp`)" />
+          <h3 class="carousel__title">{{ slide.name }}</h3>
           <q class="carousel__text">{{ slide.feedback }}</q>
           <p class="carousel__contact">{{ slide.contact }}</p>
         </div>
@@ -50,12 +48,20 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      itemsToShow: 1.1,
     };
   },
   props: {
     slides: {
       type: Array,
     },
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     handleClickPage(value) {
@@ -66,6 +72,18 @@ export default {
     },
     prevSlide() {
       this.currentSlide -= 1;
+    },
+    handleResize() {
+      let bodyWidth = Math.max(
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.body.clientWidth,
+        document.documentElement.clientWidth
+      );
+      if (bodyWidth <= 768) return (this.itemsToShow = 1.2);
+      if (bodyWidth > 768 && bodyWidth <= 1200)
+        return (this.itemsToShow = 1.25);
+      if (bodyWidth > 1200) return (this.itemsToShow = 1.3);
     },
   },
 };
@@ -78,48 +96,49 @@ export default {
     margin: 0 -min(50px, 3vw)
     &__slide
         position: relative
-        height: 60vh
+        min-height: 20vw
         width: 100%
     &__stack
-        height: 95%
-        padding: 15px
-        margin: 0 10px
+        height: 100%
+        padding: min(30px, 5vw)
+        margin: 0 min(100px, 2vw)
         width: calc(100% - 20px)
-        background: $base-white-color
+        background: rgba($base-white-color, 0.192)
+        backdrop-filter: blur(10px)
         border-radius: 15px
-        box-shadow: 2px 2px 11px rgba($base-black-color, 0.2)
+        border: 1px solid rgba($base-white-color, 0.25)
+        box-shadow: 2px 2px 11px rgba($base-black-color, 0.4)
         display: flex
         flex-direction: column
-        gap: min(30px, 4vw)
+        justify-content: center
+        align-items: center
+        gap: min(25px, 4vw)
     &__top
         display: flex
         align-items: center
     &__avatar
-        width: 50px
-        height: 50px
-        border-radius: 25px
-        background: #2c3e50
-        background: -webkit-linear-gradient(to right, #3498db, #2c3e50)
-        background: linear-gradient(to right, #3498db, #2c3e50)
-        margin-right: min(30px, 6vw)
+        width: 100px
+        height: 100px
+        border-radius: 50px
     &__title
         text-align: start
         font-size: min(26px, 6vw)
-        color: $base-black-color
+        color: $base-white-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
         margin: 0
     &__text
         text-align: start
         font-size: min(18px, 4vw)
-        color: $base-black-color
+        color: $base-white-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
         margin: 0
     &__contact
         text-align: end
         font-size: min(18px, 4vw)
-        color: $base-black-color
+        color: $base-white-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
         margin: auto 0 0
+        align-self: flex-end
     &__button
         position: absolute
         top: 0
@@ -135,6 +154,7 @@ export default {
         display: flex
         gap: 10px
         padding: 0
+        margin-top: min(50px, 5vw)
     &__dot
         border: none
         background: rgba($base-white-color, 0.3)

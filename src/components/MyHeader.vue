@@ -14,11 +14,13 @@
   display: flex
   justify-content: space-between
   align-items: center
-  max-width: 1000px
+  width: 100vw
+  margin: 0 auto
   height: $header-height
-  padding: 0 min(50px, 3vw)
+  padding: 0 min(200px, 5vw)
   z-index: 6
   background: $base-white-color
+  box-sizing: border-box
   &__logo
     font-family: 'PacificoRegular'
     font-weight: 700

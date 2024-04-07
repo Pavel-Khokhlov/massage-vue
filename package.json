@@ -2,9 +2,9 @@
   "name": "massage-vue",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pavel-khokhlov.github.io/massage-vue",
+  "homepage": "https://pavel-khokhlov.github.io/massage-vue",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build",

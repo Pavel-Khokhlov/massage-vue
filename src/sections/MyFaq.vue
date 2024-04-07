@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section faq">
     <h2 class="section__title">Вопрос-Ответ</h2>
     <ul class="faq__list">
       <li v-for="faq in faqs" :key="faq.id" class="faq__item">
@@ -25,10 +25,11 @@ export default {
 @import ../sass/index
 .faq
     box-sizing: border-box
-    margin: 0 -15px
+    margin: 0
+    background-color: rgb(242, 242, 242)
     &__list
         list-style: none
-        margin: min(50px, 10vw) 0
+        margin: min(50px, 10vw) 0 0
         padding: 0 5px
         display: flex
         flex-direction: column
@@ -41,14 +42,13 @@ export default {
     &__text
         position: relative
         padding: 10px 15px
-        max-width: 60vw
-        // box-shadow: 2px 2px 4px rgba(0,0,0,0.2)
         &.question
             margin: 0 0 0 10px
             font-size: min(24px, 5vw)
             background-color: rgba(blue, 0.5)
             color: white
             border-radius: 15px 15px 15px 0
+            max-width: min(700px, 60vw)
             &::before
                 content: ''
                 position: absolute
@@ -64,14 +64,14 @@ export default {
                 left: -10px
                 width: 10px
                 height: 20px
-                background-color: $base-white-color
+                background-color: rgb(242, 242, 242)
                 border-radius: 0 0 10px 0
                 border: none
         &.answer
             margin: 0 10px 0 0
             font-size: min(20px, 4vw)
-            max-width: 80vw
-            background-color: rgba(grey, 0.1)
+            max-width: min(900px,80vw)
+            background-color: rgba(white, 1)
             color: black
             border-radius: 15px 15px 0 15px
             align-self: flex-end
@@ -82,7 +82,7 @@ export default {
                 right: -10px
                 width: 10px
                 height: 10px
-                background-color: rgba(grey, 0.1)
+                background-color: rgba(white, 1)
             &::after
                 content: ''
                 position: absolute
@@ -90,7 +90,7 @@ export default {
                 right: -10px
                 width: 10px
                 height: 20px
-                background-color: $base-white-color
+                background-color: rgb(242, 242, 242)
                 border-radius: 0 0 0 10px
                 border: none
 </style>
