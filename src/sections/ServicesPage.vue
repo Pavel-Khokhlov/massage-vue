@@ -6,7 +6,7 @@
         v-for="service in services"
         :key="service.id"
         class="service__block"
-        :class="{ _active: currentBlock === service.id }"
+        :class="{ _active: $store.state.currentServiceOpen === service.id }"
       >
         <button
           type="button"
@@ -19,12 +19,17 @@
             src="../assets/images/icons/chevron.svg"
             alt="иконка список"
             class="service__icon"
-            :class="{ _active: currentBlock === service.id }"
+            :class="{ _active: $store.state.currentServiceOpen === service.id }"
           />
         </button>
         <p class="section__text">{{ service.text_one }}</p>
+        <img
+          :src="require(`../assets/images/services/${service.image}.webp`)"
+          alt="изображение кинезио"
+          class="service__image"
+        />
         <h3 class="section__subtitle">Показания:</h3>
-        <ul class="service__list" v-if="service.indications">
+        <ul class="service__list">
           <li
             v-for="item in service.indications"
             :key="item"
@@ -44,15 +49,23 @@ export default {
   data() {
     return {
       services: services,
-      currentBlock: "",
+      active: [],
     };
   },
+  mounted() {
+    this.initialActive();
+  },
   methods: {
+    initialActive() {
+      for (let i = 0; i === this.services.length; i++) {
+        this.active[i] = false;
+      }
+    },
     handleClick(id) {
-      if (this.currentBlock === id) {
-        this.currentBlock = "";
+      if (this.$store.state.currentServiceOpen === id) {
+        this.$store.state.currentServiceOpen = "";
       } else {
-        this.currentBlock = id;
+        this.$store.state.currentServiceOpen = id;
       }
     },
   },
@@ -66,6 +79,8 @@ export default {
         display: flex
         flex-direction: column
         gap: min(30px, 6vw)
+        &_item
+            font-size: min(20px, 5vw)
     &__block
         background: $base-white-color
         height: min(70px, 12vw)
@@ -73,10 +88,11 @@ export default {
         border-radius: 10px
         box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1)
         overflow: hidden
-        padding: 0 min(20px, 3vw)
+        padding: 0 min(40px, 3vw)
         &._active
             height: auto
             transition: all 0.5s ease
+            padding-bottom: min(30px, 5vw)
     &__button
         width: 100%
         height: min(70px, 12vw)
@@ -97,6 +113,10 @@ export default {
         &._active
             transform: rotate(180deg)
             transition: all 0.5s ease
+    &__image
+        display: block
+        width: min(400px, 100%)
+        margin: 0 auto
     &__text
         font-size: min(20px, 4vw)
         line-height: 1.3

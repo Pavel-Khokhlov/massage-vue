@@ -67,6 +67,7 @@ export default {
     font-size: min(20px, 4.5vw)
     line-height: 1.3
     padding: min(40px, 5vw) 0
+    margin: 0
     &.feedbacks
       color: white
       width: min(600px, 90vw)
