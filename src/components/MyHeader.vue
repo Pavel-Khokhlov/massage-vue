@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" id="header">
     <scroll-indicator />
     <h2 class="header__logo">П</h2>
     <my-burger />

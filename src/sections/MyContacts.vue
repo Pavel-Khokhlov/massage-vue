@@ -1,6 +1,22 @@
 <template>
-  <section class="section service">
+  <section class="section service" id="911363">
     <h2 class="section__title">Контакты</h2>
+    <p class="form__label form__label_radio">Выберите предпочитаемый вид связи:</p>
+    <div class="form__radiobuttons">
+      <div v-for="c in communications" :key="c">
+        <button
+          :id="c"
+          :name="c"
+          class="form__button_radio"
+          :class="{ _active: contactType === c }"
+          :style="{
+            backgroundImage: `url(${require('../assets/images/icons/' +
+              `${c}.png`)})`,
+          }"
+          @click="handleRadio($event)"
+        ></button>
+      </div>
+    </div>
     <form
       class="form"
       action=""
@@ -8,37 +24,15 @@
       @input="formUpdated"
       autocomplete="off"
     >
-      <label class="form__label">Выберите предпочитаемый вид связи:</label>
-      <div class="form__radiobuttons">
-        <div v-for="c in communications" :key="c">
-          <input
-            type="radio"
-            :id="c"
-            :name="c"
-            class="form__radiobutton"
-            @click="handleRadio($event)"
-          />
-          <button
-            :id="c"
-            :name="c"
-            class="form__button_radio"
-            :class="{ _active: contactType === c }"
-            :style="{
-              backgroundImage: `url(${require('../assets/images/icons/' +
-                `${c}.png`)})`,
-            }"
-            @click="handleRadio($event)"
-          ></button>
-        </div>
-      </div>
       <div class="form__field">
-        <label for="first_name" class="form__label">Имя *</label>
+        <label for="name" class="form__label">Имя</label>
         <input
           type="text"
           id="name"
           :value="formState.name"
           placeholder="Ваше имя"
           class="form__input"
+          autocomplete="off"
           @input="handleChange($event)"
         />
         <p class="form__error">{{ formError.name }}</p>
@@ -46,7 +40,7 @@
       <div class="form__field">
         <label for="contact" class="form__label">{{
           ENUM_COMMUNICATION[contactType]
-        }} *</label>
+        }}</label>
         <input
           type="text"
           id="contact"
@@ -58,12 +52,12 @@
         <p class="form__error">{{ formError.contact }}</p>
       </div>
       <div class="form__field">
-        <label for="message" class="form__label">Сообщение, отзыв...</label>
+        <label for="message" class="form__label">Сообщение, отзыв</label>
         <textarea
           type="text"
           id="message"
           :value="formState.message"
-          placeholder="Отправьте мне сообщение, отзыв..."
+          placeholder="Отправьте мне сообщение"
           class="form__input form__input_textarea"
           rows="5"
           cols="30"
@@ -233,7 +227,7 @@ export default {
 
 <style lang="sass">
 .form
-    margin-top: min(50px, 10vw)
+    margin-top: min(30px, 5vw)
     display: flex
     flex-direction: column
     gap: min(25px, 5vw)
@@ -241,7 +235,7 @@ export default {
         display: flex
         flex-direction: row
         align-items: center
-        gap: min(50px, 5vw)
+        gap: min(20px, 5vw)
     &__radiobutton
         display: none
         &_label
@@ -271,6 +265,10 @@ export default {
           height: auto
     &__label
         font-size: min(18px, 4vw)
+        margin: 0
+        &_radio
+            margin-top: min(50px, 10vw)
+            margin-bottom: min(20px, 3vw)
     &__control
         display: flex
         flex-direction: row
@@ -302,14 +300,16 @@ export default {
         &_radio
             width: 40px
             height: 40px
-            opacity: 0.2
+            opacity: 1
             border: none
             cursor: pointer
             background-color: transparent
             background-position: center
             background-size: cover
+            transform: scale(0.6)
+            transition: all 0.5s ease
             &._active
-                opacity: 1
+                transform: scale(1)
     &__error
         font-size: min(14px, 3vw)
         padding: 0

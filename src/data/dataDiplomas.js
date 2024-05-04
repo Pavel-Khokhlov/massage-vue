@@ -13,11 +13,15 @@ const diplomas = [
     },
     {
       id: 4,
-      img: "perkucia",
+      img: "pravilo",
     },
     {
       id: 5,
       img: "perkucia",
+    },
+    {
+      id: 6,
+      img: "trigger",
     },
   ];
   

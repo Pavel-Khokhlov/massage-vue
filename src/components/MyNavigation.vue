@@ -2,7 +2,12 @@
   <nav class="nav" :class="{ _active: isOpen }">
     <ul class="nav__list">
       <li v-for="link in links" :key="link.title">
-        <a :href="`#${link.path}`" class="nav__link">{{ link.title }}</a>
+        <a
+          :href="`#${link.path}`"
+          class="nav__link"
+          @click="handleClickLink(link.id)"
+          >{{ link.title }}</a
+        >
       </li>
     </ul>
   </nav>
@@ -20,6 +25,27 @@ export default {
     isOpen: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    handleClickLink(id) {
+      this.$store.state.services = this.$store.state.services.map((s) => {
+        if (s.id === id) {
+          return (s = { ...s, isOpened: true });
+        } else {
+          return (s = { ...s, isOpened: false });
+        }
+      });
+      this.$store.state.isMenuOpen = false;
+      this.$store.state.currentScrollPosition = id;
+      const headerHeight = document.getElementById('header').clientHeight;
+      let offset = 10;
+      const container = document.getElementById(id);
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = container.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - headerHeight - offset;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     },
   },
 };

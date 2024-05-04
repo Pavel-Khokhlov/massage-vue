@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section" id="911361">
     <h2 class="section__title">Обо мне</h2>
     <!-- <diplomas-carousel :slides="diplomas" /> -->
     <div class="about__certificates">
@@ -49,8 +49,8 @@ export default {
   &__button
     border: none
     background: transparent
-    width: min(200px, 20vw)
-    height: min(200px, 20vw)
+    width: min(120px, 16vw)
+    height: min(120px, 16vw)
     border-radius: min(20px, 2vw)
     background-position: center
     background-size: cover

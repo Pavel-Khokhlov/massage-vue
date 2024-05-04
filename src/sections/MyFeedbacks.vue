@@ -1,5 +1,5 @@
 <template>
-  <section class="section feedbacks">
+  <section class="section feedbacks" id="911362">
     <h2 class="section__title feedbacks">Отзывы</h2>
     <p class="section__text feedbacks">
       Благодарю вас за оказанное мне доверие. Мне очень приятно получать от вас

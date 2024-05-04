@@ -3,23 +3,24 @@
     <h2 class="section__title service">Мои услуги</h2>
     <div class="service__list">
       <div
-        v-for="service in services"
+        v-for="service in $store.state.services"
         :key="service.id"
         class="service__block"
-        :class="{ _active: $store.state.currentServiceOpen === service.id }"
+        :class="{ _active: service.isOpened }"
       >
         <button
           type="button"
+          :id="service.id"
           :name="service.id"
           class="service__button"
-          @click="handleClick(service.id)"
+          @click="handleServiceClick(service.id)"
         >
           <h2 class="service__title">{{ service.title }}</h2>
           <img
             src="../assets/images/icons/chevron.svg"
             alt="иконка список"
             class="service__icon"
-            :class="{ _active: $store.state.currentServiceOpen === service.id }"
+            :class="{ _active: service.isOpened }"
           />
         </button>
         <p class="section__text">{{ service.text_one }}</p>
@@ -44,29 +45,21 @@
 </template>
 
 <script>
-import services from "../data/dataServices.js";
 export default {
   data() {
     return {
-      services: services,
       active: [],
     };
   },
-  mounted() {
-    this.initialActive();
-  },
   methods: {
-    initialActive() {
-      for (let i = 0; i === this.services.length; i++) {
-        this.active[i] = false;
-      }
-    },
-    handleClick(id) {
-      if (this.$store.state.currentServiceOpen === id) {
-        this.$store.state.currentServiceOpen = "";
-      } else {
-        this.$store.state.currentServiceOpen = id;
-      }
+    handleServiceClick(id) {
+      this.$store.state.services = this.$store.state.services.map((s) => {
+        if (s.id === id) {
+          return (s = { ...s, isOpened: !s.isOpened });
+        } else {
+          return s;
+        }
+      });
     },
   },
 };
