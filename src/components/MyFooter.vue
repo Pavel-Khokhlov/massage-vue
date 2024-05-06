@@ -8,12 +8,11 @@
 </template>
 
 <script>
-import version from "../../package.json";
+import packageJson from "../../package.json";
 export default {
   data() {
     return {
-      VERSION_APP: version.version,
-      CURRENT_YEAR: 0,
+      VERSION_APP: packageJson.version,
     };
   },
   methods: {
