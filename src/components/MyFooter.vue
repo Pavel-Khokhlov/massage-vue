@@ -31,7 +31,7 @@ export default {
   justify-content: space-between
   margin: min(50px, 5vw) min(50px, 3vw)
   &__copyright
-    font-family: 'Jura'
+    font-family: 'RobotoCondensed'
     font-size: min(16px, 3vw)
     color: $base-grey-color
     margin: 0

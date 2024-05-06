@@ -36,9 +36,8 @@ export default {
           return (s = { ...s, isOpened: false });
         }
       });
-      this.$store.state.isMenuOpen = false;
       this.$store.state.currentScrollPosition = id;
-      const headerHeight = document.getElementById('header').clientHeight;
+      const headerHeight = document.getElementById("header").clientHeight;
       let offset = 10;
       const container = document.getElementById(id);
       const bodyRect = document.body.getBoundingClientRect().top;
@@ -46,6 +45,9 @@ export default {
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - headerHeight - offset;
       window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      this.$store.state.isMenuOpen = false;
+      const body = document.querySelector(".body");
+      body.style.overflow = "auto";
     },
   },
 };
@@ -71,7 +73,9 @@ export default {
         flex-direction: column
         gap: 4vw
     &__link
-        font-size: 7vw
+        font-family: 'RobotoCondensed'
+        font-size: min(24px, 7vw)
+        font-weight: 400
         text-decoration: none
         color: $base-black-color
 </style>

@@ -1,7 +1,7 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `${process.env.VUE_APP_TELEGRAM_API}${process.env.VUE_APP_TELEGRAM_BOT}:${process.env.VUE_APP_TELEGRAM_TOKEN}`
+  baseURL: `${import.meta.env.VITE_TELEGRAM_API}${import.meta.env.VITE_TELEGRAM_BOT}:${import.meta.env.VITE_TELEGRAM_TOKEN}`
 });
 
 export default api;

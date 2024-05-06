@@ -8,6 +8,7 @@
   <my-faq />
   <my-footer />
   <my-menu-modal :isOpen="$store.state.isMenuOpen" />
+  <my-diplomas-modal :isOpen="$store.state.isDiplomasOpen" />
 </template>
 
 <script>
@@ -50,6 +51,8 @@ export default {
     margin: 0 auto
     font-size: min(40px, 6vw)
     line-height: 1.3
+    font-family: 'RobotoCondensed'
+    font-weight: 500
     &.service
       margin-bottom: min(40px, 6vw)
     &.feedbacks
@@ -69,6 +72,8 @@ export default {
     padding: min(40px, 5vw) 0
     margin: 0
     &.feedbacks
+      font-family: 'RobotoCondensed'
+      font-weight: 400 
       color: white
       width: min(600px, 90vw)
       margin: 0 auto

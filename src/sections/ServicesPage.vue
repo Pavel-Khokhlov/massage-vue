@@ -25,7 +25,7 @@
         </button>
         <p class="section__text">{{ service.text_one }}</p>
         <img
-          :src="require(`../assets/images/services/${service.image}.webp`)"
+          :src="`${images[`${service.image}`]}`"
           alt="изображение кинезио"
           class="service__image"
         />
@@ -45,10 +45,12 @@
 </template>
 
 <script>
+import images from "../assets/images/services/index";
 export default {
   data() {
     return {
       active: [],
+      images: images,
     };
   },
   methods: {
@@ -110,6 +112,8 @@ export default {
         display: block
         width: min(400px, 100%)
         margin: 0 auto
+        border-radius: min(20px, 2vw)
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2)
     &__text
         font-size: min(20px, 4vw)
         line-height: 1.3

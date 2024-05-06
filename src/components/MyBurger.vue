@@ -13,7 +13,13 @@ export default {
   },
   methods: {
     handleBurgerClick() {
+      const body = document.querySelector(".body");
       this.$store.state.isMenuOpen = !this.$store.state.isMenuOpen;
+      if (this.$store.state.isMenuOpen) {
+        body.style.overflow = "hidden";
+      } else {
+        body.style.overflow = "auto";
+      }
     },
   },
 };
@@ -22,6 +28,7 @@ export default {
 <style lang="sass">
 @import ../sass/index
 .burger
+    display: block
     position: relative
     width: 30px
     height: 15px
@@ -29,6 +36,8 @@ export default {
     background: transparent
     cursor: pointer
     z-index: 10
+    @media screen and (min-width: 768px)
+        display: none
     &::before
         content: ""
         width: 100%

@@ -1,7 +1,9 @@
 <template>
   <section class="section service" id="911363">
     <h2 class="section__title">Контакты</h2>
-    <p class="form__label form__label_radio">Выберите предпочитаемый вид связи:</p>
+    <p class="form__label form__label_radio">
+      Выберите предпочитаемый вид связи:
+    </p>
     <div class="form__radiobuttons">
       <div v-for="c in communications" :key="c">
         <button
@@ -10,8 +12,7 @@
           class="form__button_radio"
           :class="{ _active: contactType === c }"
           :style="{
-            backgroundImage: `url(${require('../assets/images/icons/' +
-              `${c}.png`)})`,
+            backgroundImage: `url(${images[`${c}`]})`,
           }"
           @click="handleRadio($event)"
         ></button>
@@ -90,6 +91,7 @@
 </template>
 
 <script>
+import images from "../assets/images/icons/index";
 import api from "../api";
 
 const REG_NAME = /^[a-zA-Zа-яА-ЯЁё\s-_']+$/i;
@@ -127,6 +129,7 @@ export default {
       formError: initialError(),
       isFormCompleted: false,
       isFormClear: true,
+      images: images,
     };
   },
   methods: {
@@ -205,7 +208,9 @@ export default {
       let message = `Request: Pravilo / Massage%0AName: ${this.formState.name}%0ACommunication: ${this.contactType}%0AContact: ${this.formState.contact}%0AMessage: ${this.formState.message}`;
       try {
         await api.post(
-          `/sendMessage?chat_id=${process.env.VUE_APP_TELEGRAM_CHAT_ID}&text=${message}`
+          `/sendMessage?chat_id=${
+            import.meta.env.VITE_TELEGRAM_CHAT_ID
+          }&text=${message}`
         );
         this.handleClearForm();
       } catch (e) {
@@ -249,8 +254,9 @@ export default {
         gap: min(5px, 1vw)
     &__input
         width: min(400px, 100%)
-        font-family: 'Jura'
+        font-family: 'RobotoCondensed'
         font-size: min(20px, 5vw)
+        font-weight: 400
         height: min(50px, 10vw)
         border: none
         border-bottom: 1px solid rgba(grey, 0.5)
@@ -259,13 +265,17 @@ export default {
           outline: none
           border-bottom: 1px solid rgba(blue, 0.5)
         &::placeholder
-          color: rgba(grey, 0.5)
+          color: rgba(grey, 0.8)
+          font-weight: 400
         &_textarea
           width: 100%
           height: auto
     &__label
-        font-size: min(18px, 4vw)
+        font-family: 'RobotoCondensed'
+        font-size: min(16px, 3.5vw)
+        font-weight: 400
         margin: 0
+        color: rgba(black, 1)
         &_radio
             margin-top: min(50px, 10vw)
             margin-bottom: min(20px, 3vw)
@@ -317,4 +327,3 @@ export default {
         color: red
         height: 16px
 </style>
-../api

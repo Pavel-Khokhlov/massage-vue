@@ -8,21 +8,29 @@
         :key="thumb.id"
         class="about__button"
         :style="{
-          backgroundImage: `url(${require('../assets/images/diplomasCarousel/thumb/' +
-            `${thumb.img}.webp`)})`,
+          backgroundImage: `url(${images[`${thumb.img}`]})`,
         }"
+        :on:click="() => handleClickCertificate(thumb.img)"
       ></button>
     </div>
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import diplomas from "../data/dataDiplomas.js";
+import images from "../assets/images/diplomasCarousel/thumb/index";
 export default {
   data() {
     return {
       diplomas: diplomas,
+      images: images,
     };
+  },
+  methods: {
+    handleClickCertificate(value: number) {
+      this.$store.state.currentDiploma = value;
+      this.$store.state.isDiplomasOpen = true;
+    },
   },
 };
 </script>

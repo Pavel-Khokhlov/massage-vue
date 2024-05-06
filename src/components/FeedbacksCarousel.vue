@@ -4,7 +4,7 @@
       ref="carousel"
       v-model="currentSlide"
       :items-to-show="itemsToShow"
-      :autoplay="5000"
+      :autoplay="$store.state.isMenuOpen || $store.state.isDiplomasOpen ? 0 : 5000"
       :wrap-around="true"
       :transition="500"
       :pauseAutoplayOnHover="true"
@@ -12,7 +12,7 @@
     >
       <slide v-for="slide in slides" :key="slide.id + 20">
         <div class="carousel__stack">
-          <img alt="avatar" class="carousel__avatar" :src="require(`../assets/images/feedbackCarousel/${slide.avatar}.webp`)" />
+          <img alt="avatar" class="carousel__avatar" :src="(`${images[`${slide.avatar}`]}`)" />
           <h3 class="carousel__title">{{ slide.name }}</h3>
           <q class="carousel__text">{{ slide.feedback }}</q>
           <p class="carousel__contact">{{ slide.contact }}</p>
@@ -39,6 +39,7 @@
 
 <script>
 import { Carousel, Slide } from "vue3-carousel";
+import images from "../assets/images/feedbackCarousel/index";
 import "vue3-carousel/dist/carousel.css";
 export default {
   components: {
@@ -49,6 +50,7 @@ export default {
     return {
       currentSlide: 0,
       itemsToShow: 1.1,
+      images: images,
     };
   },
   props: {
@@ -121,12 +123,16 @@ export default {
         height: 100px
         border-radius: 50px
     &__title
+        font-family: 'RobotoCondensed'
+        font-weight: 500 
         text-align: start
         font-size: min(26px, 6vw)
         color: $base-white-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
         margin: 0
     &__text
+        font-family: 'RobotoCondensed'
+        font-weight: 400 
         text-align: start
         font-size: min(18px, 4vw)
         color: $base-white-color

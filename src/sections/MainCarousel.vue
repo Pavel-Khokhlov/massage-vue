@@ -4,7 +4,7 @@
       ref="carousel"
       v-model="currentSlide"
       :items-to-show="1"
-      :autoplay="5000"
+      :autoplay="$store.state.isMenuOpen || $store.state.isDiplomasOpen ? 0 : 5000"
       :wrap-around="true"
       :transition="500"
       :pauseAutoplayOnHover="true"
@@ -15,8 +15,7 @@
         :key="slide.id"
         class="carousel__slide"
         :style="{
-          backgroundImage: `url(${require('../assets/images/mainCarousel/' +
-            `${slide.path}.webp`)})`,
+          backgroundImage: `url(${images[`${slide.path}`]})`
         }"
       >
         <div class="carousel__info">
@@ -51,6 +50,7 @@
 <script>
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import images from "../assets/images/mainCarousel/index";
 import arrowPrev from "../assets/images/icons/arrowPrev.svg";
 import arrowNext from "../assets/images/icons/arrowNext.svg";
 export default {
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      images: images,
     };
   },
   props: {
@@ -123,6 +124,8 @@ export default {
         border: 1px solid rgba($base-white-color, 0.5)
     &__title
         text-align: start
+        font-family: 'RobotoCondensed'
+        font-weight: 500 
         font-size: min(34px, 6vw)
         color: $base-black-color
         // text-shadow: 1px 1px 2px rgba($base-black-color, 0.6)
@@ -142,6 +145,8 @@ export default {
         background: #2c3e50
         background: -webkit-linear-gradient(to right, #3498db, #2c3e50)
         background: linear-gradient(to right, #3498db, #2c3e50)
+        font-family: 'RobotoCondensed'
+        font-weight: 400 
         font-size: min(20px, 5vw)
         color: $base-white-color
         box-shadow: 2px 2px 4px rgba($base-black-color, 0.3)

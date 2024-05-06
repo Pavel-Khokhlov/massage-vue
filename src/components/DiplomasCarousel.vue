@@ -68,6 +68,7 @@ export default {
   methods: {
     handleClickPage(value) {
       this.currentSlide = value;
+      this.$store.state.isisDiplomasOpen = true
     },
   },
 };

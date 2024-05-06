@@ -40,6 +40,9 @@ export default {
         flex-direction: column
         gap: min(30px, 5vw)
     &__text
+        font-family: 'RobotoCondensed'
+        font-weight: 400
+        line-height: 1.3
         position: relative
         padding: 10px 15px
         &.question
@@ -68,6 +71,7 @@ export default {
                 border-radius: 0 0 10px 0
                 border: none
         &.answer
+            font-weight: 300 
             margin: 0 10px 0 0
             font-size: min(20px, 4vw)
             max-width: min(900px,80vw)
